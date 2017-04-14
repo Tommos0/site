@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+<body>
+<div id="content"></div>
+<script>
+    var lines;
+
+    var processLine = function (lineNumber) {
+        var par = document.createElement('p');
+        var t = document.createTextNode(lines[lineNumber]);
+        par.appendChild(t);
+        document.getElementById('content').appendChild(par);
+        eval(lines[lineNumber]);
+        window.setTimeout(function () {
+            processLine(lineNumber + 1)
+        }, 100);
+    };
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            lines = this.response.split("\n");
+            processLine(0);
+        }
+    };
+    xhttp.open("GET", "program.js", true);
+    xhttp.send();
+</script>
+</body>
+</html>
