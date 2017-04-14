@@ -43,33 +43,33 @@ processLine = function (lineNumber) { var duration = lines[lineNumber].split("|"
 5000|var xhttp = new XMLHttpRequest();xhttp.onreadystatechange = function () {if (this.readyState == 4 && this.status == 200) {$("#content").css('white-space','pre').text(this.response);}};xhttp.open("GET", "index.html", true); xhttp.send();
 5000|//and the rest is this file (I wonder if I can fetch my own code?)
 15000|var xhttp = new XMLHttpRequest();xhttp.onreadystatechange = function () {if (this.readyState == 4 && this.status == 200) {$("#content").css('white-space','pre').text(this.response);}};xhttp.open("GET", "program.js", true); xhttp.send();
-5000|//OK, it's about time to make a real website..
-//Hello there!
-//I'm back - this is my second evening already working on this thing.
-//Feeling a bit strange about typing messages to my computer :).
-//I was thinking about a couple of things for this website...
-//
-//First
-//Why am I even writing this thing?
-//It's strange now typing to a screen.
-//I think my idea is to publicize it somewhere.
-//So I will rent some server space to host it.
-//
-//Second
-//I wonder if somebody will ever read this?
-//But if you are -
-//So for I've only been talking to you
-//I will make an input field in which you can type something back to me!
-//
-//Third
-//This website needs a name
-//I decided on something simple -
-//The website will be named after its assigned IP address
-//This way I also don't need a domain name :).
-//
-//Fourth
-//I want to do something fancy for these messages
-//
-//Ok I've got the server! This means that the name of the website is from now on 35.160.143.3
+3000|//OK, it's about time to make a real website..
+1000|//Hello there!
+1000|//I'm back - this is my second evening already working on this thing.
+1000|//Feeling a bit strange about typing messages to my computer :).
+1000|//I was thinking about a couple of things for this website...
+1000|//
+1000|//First
+1000|//Why am I even writing this thing?
+1000|//It's strange now typing to a screen.
+1000|//I think my idea is to publicize it somewhere.
+1000|//So I will rent some server space to host it.
+1000|//
+1000|//Second
+1000|//I wonder if somebody will ever read this?
+1000|//But if you are -
+1000|//So for I've only been talking to you
+1000|//I will make an input field in which you can type something back to me!
+1000|//
+1000|//Third
+1000|//This website needs a name
+1000|//I decided on something simple -
+1000|//The website will be named after its assigned IP address
+1000|//This way I also don't need a domain name :).
+1000|//
+1000|//Fourth
+1000|//I want to do something fancy for these messages
+1000|//
+1000|//Ok I've got the server! This means that the name of the website is from now on 35.160.143.3
 document.title = '35.160.143.3';
 
