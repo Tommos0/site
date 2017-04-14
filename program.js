@@ -12,7 +12,7 @@ var script = document.createElement('script'); script.src = 'https://code.jquery
 //1
 //2
 //3 for the slow connections!
-//for the programmers - it's probably better to have an onLoad handler for when the script is loaded
+//It's probably better to have an onLoad handler for when the script is loaded
 //But i'm lazy like that.
 //OK let's see if I can make this text go red!
 $("#content").css('color' , 'red');
