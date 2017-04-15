@@ -76,7 +76,7 @@ processLine = function (lineNumber) { var duration = lines[lineNumber].split("|"
 3000|//now
 3000|button.click(function() { sendMessage ( input.val() ) });
 3000|//and implement sendMessage
-3000|sendMessage = function(message) { $.post('/server/message', message , function() { messageDone() }, 'text'); };
+3000|sendMessage = function(message) { $.ajax({url:'/server/message', data:message, contentType:'text/plain', dataType:'text' , success:function() { messageDone() }}); };
 3000|thankYou = '<span>Thank you!</span>';
 3000|messageDone = function() { var elmThankYou = $(thankYou); elmThankYou.insertAfter(button); setTimeout(function() { elmThankYou.remove; }, 500); };
 10000|showCode('server.py');
