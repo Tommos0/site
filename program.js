@@ -80,3 +80,4 @@ processLine = function (lineNumber) { var duration = lines[lineNumber].split("|"
 3000|thankYou = '<span>Thank you!</span>';
 3000|messageDone = function() { var elmThankYou = $(thankYou); elmThankYou.insertAfter(button); setTimeout(function() { elmThankYou.remove, 500 }); };
 10000|showCode('server.py');
+10000|showCode('nginx.conf');
