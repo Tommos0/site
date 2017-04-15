@@ -6,14 +6,13 @@ console.log('test');
 //But not only that - I'm also executing this as code in your browser!
 //This is why everything is starting with two slashes - this code is never executed//
 //Let's make something happen though!
-//First let me pull something in called jQuery, it basically makes my life a little easier
+//First let me pull something in called jQuery, it will make things little easier for me:
 var script = document.createElement('script'); script.src = 'https://code.jquery.com/jquery-3.2.1.min.js'; document.body.appendChild(script);
 //Ok that should load it! I have to wait a little bit to make sure it is loaded though, so please wait a little.
 //1
 //2
-//3 for the slow connections!
 //It's probably better to have an onLoad handler for when the script is loaded
-//But i'm lazy like that.
+//But that's for later.
 //OK let's see if I can make this text go red!
 $("#content").css('color' , 'red');
 //Seems fine! I have to do something about the display, maybe your screen is getting full of text..
@@ -29,57 +28,76 @@ processLine = function (lineNumber) { var duration = lines[lineNumber].split("|"
 3000|//Or...
 3000|//Really...
 3000|//Slow...
+2000|showFile = function(fileName) { setTimeout(function() { var xhttp = new XMLHttpRequest();xhttp.onreadystatechange = function () {if (this.readyState == 4 && this.status == 200) {$("#content").css('white-space','pre').text(this.response);}};xhttp.open("GET", fileName, true); xhttp.send(); }, 2000);  }
 2000|//If you're interested: this is the html that is loaded and that loads this file:
-2000|showCode = function(fileName) { setTimeout(function() { var xhttp = new XMLHttpRequest();xhttp.onreadystatechange = function () {if (this.readyState == 4 && this.status == 200) {$("#content").css('white-space','pre').text(this.response);}};xhttp.open("GET", fileName, true); xhttp.send(); }, 2000);  }
-5000|showCode('index.html');
+5000|showFile('index.html');
 5000|//and the rest is this file (I wonder if I can fetch my own code?)
-10000|showCode('program.js');
-3000|//OK, it's about time to make a real website..
-3000|//Hello there!
-3000|//I'm back - this is my second evening already working on this thing.
-3000|//Feeling a bit strange about typing messages to my computer :).
-3000|//I was thinking about a couple of things for this website...
-3000|//
-3000|//First
-3000|//Why am I even writing this thing?
-3000|//It's strange now typing to a screen.
-3000|//I think my idea is to publicize it somewhere.
-3000|//So I will rent some server space to host it.
-3000|//
-3000|//Second
-3000|//I wonder if somebody will ever read this?
-3000|//But if you are -
-3000|//So for I've only been talking to you
-3000|//I will make an input field in which you can type something back to me!
-3000|//
-3000|//Third
-3000|//This website needs a name
-3000|//I decided on something simple -
-3000|//The website will be named after its assigned IP address
-3000|//This way I also don't need a domain name :).
-3000|//
-3000|//Fourth
-3000|//I want to do something fancy for these messages
-3000|//
-3000|//Ok I've got the server! This means that the name of the website is from now on 35.160.143.3
-3000|document.title = '35.160.143.3';
-3000|//We're live! I'm still changing the timings a little bit to make it easier to read..
-3000|//So.. let's make this input thing for you!
-3000|input = $('<input placeholder="Type here!"/>');
-3000|$('body').prepend(input);
-3000|button = $('<button type="button">Send</button>');
-3000|button.insertAfter(input);
-3000|//There you go
-3000|//Obviously the button doesn't do anything yet
-3000|//So let's disable it for now
-3000|button.prop('disabled',true);
-3000|//now
-3000|button.click(function() { sendMessage ( input.val() ) });
-3000|//and implement sendMessage
-3000|sendMessage = function(message) { $.ajax({url:'/server/message', type:'POST', data:message, contentType:'text/plain', dataType:'text' , success:function() { messageDone() }}); };
-3000|thankYou = '<span>Thank you!</span>';
-3000|messageDone = function() { var elmThankYou = $(thankYou); elmThankYou.insertAfter(button); setTimeout(function() { elmThankYou.remove; }, 500); };
-3000|//done!
-3000|button.prop('disabled',false);
-10000|showCode('server.py');
-10000|showCode('nginx.conf');
+10000|showFile('program.js');
+3000|//Time for some magic...
+2000|loadScript = function(url) { var script = document.createElement('script'); script.src = 'url'; document.body.appendChild(script); };
+5000|if (typeof Promise === 'undefined') loadScript('https://github.com/taylorhakes/promise-polyfill/blob/master/promise.min.js');
+1000|typeWriter = function(text, callback) { return new Promise(function (resolve, reject) { function next(currentText, i) { window.setTimeout(function () { callback(currentText); if (i < text.length) next(currentText + text[i], i + 1); else resolve(); }, Math.random() * 100) } next('', 0) }); };
+1000|display         = function(code) { return typeWriter(code, function(text) { $("#content").text(text); }) };
+1000|executeCode     = function(line) { try { eval(line) } catch (e) { if (!(e instanceof SyntaxError) && (!(e instanceof ReferenceError))) console.log(e); } };
+1000|running = true;
+2000|processLine = function (lineNumber) { running = true; currentLine = lineNumber; var code = lines[lineNumber]; display(code).then( function() { executeCode(code); if (running && (lineNumber + 1 < lines.length)) window.setTimeout(function () { if (running) processLine(lineNumber + 1) }, 1000); })};
+stopExecution   = function() { running = false; };
+startExecution  = function(line) { processLine(typeof line === 'undefined' ? (currentLine+1) : line) };
+wait = function(time) { stopExecution(); setTimeout(startExecution,time) };
+Now I have some more control!
+I can stop the code from running
+stopExecution(); setTimeout(startExecution, 5000)//And start again later!
+I can even go back in time..
+if (typeof flag === 'undefined') startExecution(currentLine - 4); if (flag) startExecution(currentLine + 3);  flag = false;
+Oops - I didn't stop the execution, now there are two lines being processed at the same time..
+Which is causing some problems
+Let's fix that..
+We're ok again!
+Hello there!
+I'm back - this is my second evening already working on this thing.
+Feeling a bit strange about typing messages to my computer :).
+I was thinking about a couple of things for this website...
+
+First
+Why am I even writing this thing?
+It's strange now typing to a screen.
+I think my idea is to publicize it somewhere.
+So I will rent some server space to host it.
+
+Second
+I wonder if somebody will ever read this?
+But if you are -
+So far I've only been talking to you
+I will make an input field in which you can type something back to me!
+
+Third
+This website needs a name.
+I decided on something simple -
+The website will be named after its assigned IP address
+This way I also don't need a domain name :).
+
+Ok I've got the server! This means that the name of the website is from now on 35.160.143.3
+document.title = '35.160.143.3';
+We're live!
+So let's make this input thing for you!
+input = $('<input placeholder="Type here!"/>');
+$('body').prepend(input);
+button = $('<button type="button">Send</button>');
+button.insertAfter(input);
+There you go!
+Obviously the button doesn't do anything yet.
+So let's disable it for now:
+button.prop('disabled',true);
+and do the following
+button.click(function() { sendMessage ( input.val() ) });
+sendMessage = function(message) { $.ajax({url:'/server/message', type:'POST', data:message, contentType:'text/plain', dataType:'text' , success:function() { messageDone() }}); };
+thankYou = '<span>Thank you!</span>';
+messageDone = function() { var elmThankYou = $(thankYou); elmThankYou.insertAfter(button); setTimeout(function() { elmThankYou.remove(); }, 500); };
+done!
+button.prop('disabled',false);
+Now you can send me a message!
+Message server:
+showFile('server.py'); wait(10000);
+nginx config:
+showFile('nginx.conf'); wait(10000);
+EOF
