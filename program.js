@@ -16,7 +16,7 @@ var script = document.createElement('script'); script.src = 'https://code.jquery
 //OK let's see if I can make this text go red!
 $("#content").css('color' , 'red');
 //Seems fine! I have to do something about the display, maybe your screen is getting full of text..
-//I can modify the function the displays my texts a little:
+//I can modify the function that displays my texts a little:
 processLine = function (lineNumber) { var duration = lines[lineNumber].split("|")[0];var code = lines[lineNumber].slice(duration.length+1);$("#content").text(code); eval(code); if (lineNumber + 1 < lines.length) window.setTimeout(function () {processLine(lineNumber + 1)}, parseInt(duration));};
 2000|//i hope this is still working :)
 2000|//Took me a bit to get this to work but I'm back in business and I have a new thing to play with,
@@ -61,7 +61,7 @@ I was thinking about a couple of things for this website...
 First
 Why am I even writing this thing?
 It's strange now typing to a screen.
-I think my idea is to publicize it somewhere.
+I think my idea is to publish it somewhere.
 So I will rent some server space to host it.
 
 Second
