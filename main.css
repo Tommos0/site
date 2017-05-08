@@ -1,0 +1,28 @@
+* {
+    box-sizing : border-box;
+}
+html, body {
+    height:100%;
+}
+.jsblock {
+    height:100%;
+    overflow:hidden;
+    background: hsl(30, 20%, 25%);
+    border:.3em solid hsl(30, 20%, 40%);
+}
+
+.jsblockinner {
+    position:relative;
+    transition: 0.8s;
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size:200% !important;
+        background-color:yellow;
+    }
+}
+
+body {
+    /*font-size:200% !important;*/
+}

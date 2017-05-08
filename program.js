@@ -1,3 +1,5 @@
+processLine(107);
+sdf
 //hello
 //line2
 console.log('test');
@@ -103,4 +105,17 @@ showFile('server.py'); wait(10000);
 nginx config:
 showFile('nginx.conf'); wait(10000);
 EOF
+loadScript = function(url) { return new Promise(function(resolve, reject) { var script = document.createElement('script'); script.addEventListener('load', resolve); script.addEventListener('error', reject); script.src = url; document.head.appendChild(script); }); };
+loadScript('functions.js');
+loadScript('prism.js?2');
+loadScript('prism-highlight.js?8');
+loadCSS('prism.css?4');
+loadCSS('reset.css');
+loadCSS('main.css?14');
+getFile('program.js').then(function(script) { document.body.innerHTML = ''; jsBlock = createCodeElm(script); document.body.appendChild(jsBlock); j1 = Object.create(jsmachine); j1.lines = script.split("\n"); j1.display = function (line) { return new Promise(function(resolve) { highlight(jsBlock.querySelector('pre'),(j1.currentLine+1).toString()); resolve(); })}; j1.processLine(116);});
+processLine = function() {};
+console.log(this);
+console.log('123');
+console.log('456');
+this.processLine(116); this.stop();
 lines.push('lines.push(lines[currentLine].slice(0,-1));'); //repeat 12345
